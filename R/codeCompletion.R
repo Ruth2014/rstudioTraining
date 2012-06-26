@@ -2,12 +2,12 @@
 
 # Press TAB to complete the 'plot()'command
 # plot(cars)
-plot(cars)
+pl
 
 
 # Use TAB to help with function arguments
 # matrix(data=0, nrow=2, ncol=2)
-matrix(data=0, nrow=2, ncol=2)
+matrix()
 
 
 # Use TAB to help with directory paths
