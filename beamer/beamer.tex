@@ -1,0 +1,78 @@
+\documentclass{beamer}
+\mode<presentation> {
+  \usetheme{Madrid}
+  \setbeamercovered{transparent}
+  \setbeamercovered{invisible}
+  \setbeamertemplate{navigation symbols}{}
+  \hypersetup{colorlinks,urlcolor=blue}
+}
+\setlength{\parindent}{0.5cm}
+\usepackage{graphicx}
+\usepackage{url}
+\title[]{My First Beamer Presentation}
+\author{Insert Name Here}
+\institute[My Company]
+{
+  \small
+  Subtitle\\
+  \scriptsize
+  \href{mailto:email@example.com}{email@example.com}
+}
+\date{\today}
+
+\begin{document}
+
+
+\begin{frame}
+\Large
+\titlepage
+\end{frame}
+
+
+\begin{frame}[t]
+\frametitle{Slide Title}
+\Large
+Basic Slide
+\end{frame}
+
+
+\begin{frame}[t]
+\frametitle{Slide Title}
+\bigskip
+\Large
+\begin{center}
+Example Bullet List
+\end{center}
+\medskip
+\begin{itemize}
+\item Bullet
+\medskip
+\begin{itemize}
+\item Sub-Bullet
+\end{itemize}
+\item Bullet
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[t]
+\frametitle{Slide Title}
+\bigskip
+\Large
+\begin{itemize}
+\item More Resources:
+\medskip
+\begin{itemize}
+\item \url{http://www.math.umbc.edu/~rouben/beamer/}
+\medskip
+\item \url{https://bitbucket.org/rivanvx/beamer/wiki/Home}
+\medskip
+\item \url{http://jeromyanglim.blogspot.com/2010/08/simple-beamer-template-for-getting.html}
+\medskip
+\item \url{http://www.shawnlankton.com/2008/02/beamer-and-latex-with-keynote-theme/}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\end{document}
