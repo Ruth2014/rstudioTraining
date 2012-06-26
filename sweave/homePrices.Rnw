@@ -1,0 +1,100 @@
+\documentclass{article}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+<<data>>=
+# Home Prices In Mid-West
+# load in the data via the Import Dataset feature in the workspace
+# Change "rating" to be treated as a factor
+homes <- read.csv("~/Desktop/rstudioTraining/data/homePrice.csv")
+@
+
+
+<<summary>>=
+# view the variable names and get a quick summary of the data
+names(homes)
+summary(homes)
+hist(homes$price)
+
+class(homes$rating)
+homes$rating <- as.factor(homes[,3])
+class(homes$rating)
+@
+
+
+<<initialPlot, fig=TRUE>>=
+# plot price based on the rating
+plot(homes$rating, homes$price)
+@
+
+
+<<advancedPlot, fig=TRUE>>=
+# make a more advanced plot with layers
+homes$rating <- as.integer(homes[,3])
+class(homes$rating)
+ratingMeans <- rep(0,5)
+for (i in 1:5) {
+  ratingMeans[i] <- mean(subset(homes, rating == i)$price)
+}
+
+plot(homes$rating, homes$price, main = "Breakdown of Price by Rating",
+     xlab = "Rating", ylab = "Price", las=2, labels=FALSE)
+axis(1)
+axis(2, at = c(0, 2e5, 4e5, 6e5, 8e5), labels = c("0", "200k", "400k", "600k", "800k"), las=2)
+
+points(1:5, ratingMeans, col="red", pch=19)
+text(1:4, ratingMeans[1:4], round(ratingMeans[1:4], -3), pos=4)
+text(5, ratingMeans[5], round(ratingMeans[5], -3), pos=2)
+
+@
+
+
+<<ggplot2, fig=TRUE>>=
+library(ggplot2)
+
+
+# plot price based on the rating
+qplot(rating, price, color = age, data = homes)
+
+@
+
+
+<<fancyPlot, fig=TRUE>>=
+# make a more advanced plot with nice formatting
+p <- qplot(rating, price, color = age, data = homes,
+           main = "Breakdown of Price by Rating", xlab="Rating")
+p <- p + opts(plot.title = theme_text(size = 23))
+p <- p + opts(axis.title.x=theme_text(size=16, vjust=-0.05))
+p <- p + opts(axis.title.y=theme_text(size=16))
+p <- p + opts(legend.title=theme_text(size=14))
+p <- p + scale_y_continuous(name="Price", labels=c("200k", "400k", "600k", "800k"))
+p <- p + geom_point()
+
+print(p)
+
+@
+
+<<anotherPlot, fig=TRUE>>=
+# use the extract function feature to wrap the formatting commands into a function called formatPlot
+# put it into a new file called formatPlot.R and source the file
+
+source("~/Desktop/rstudioTraining/R/formatPlot.R")
+
+# use the new function (use tab completion)
+p <- qplot(age, price, color = rating, data = homes,
+           main = "Breakdown of Prices by Age and rating", xlab="Age") + geom_smooth()
+formatPlot(p)
+
+@
+
+<<lastPlot, fig=TRUE>>=
+p <- qplot(state, price, color = rating, data = homes,
+           main = "Breakdown of Prices by State and Rating", xlab="State")
+formatPlot(p)
+
+@
+
+
+
+\end{document}
